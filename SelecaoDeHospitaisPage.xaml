@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Hmed.Login.SelecaoDeHospitaisPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:custom="clr-namespace:Hmed.AppComponents.CustomComponents"
+    Title="{Binding Titulo}"
+    BackgroundColor="White">
+
+    <ContentPage.Content>
+        <AbsoluteLayout>
+
+            <ActivityIndicator IsVisible="{Binding Carregado, Converter={StaticResource NegateBool}}" />
+
+            <StackLayout
+                AbsoluteLayout.LayoutBounds="1, 1, 1, 1"
+                AbsoluteLayout.LayoutFlags="All"
+                IsVisible="{Binding Carregado}">
+
+                <StackLayout Margin="10,5">
+                    <SearchBar
+                        BackgroundColor="White"
+                        CancelButtonColor="Transparent"
+                        FontSize="16"
+                        Placeholder="Buscar Instituição"
+                        
+                        Text="{Binding Pesquisa}" />
+                </StackLayout>
+                <Grid
+                    HeightRequest="25"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="Center">
+                    <StackLayout
+                        Margin="0,10,0,0"
+                        Padding="0,-15,0,0"
+                        AbsoluteLayout.LayoutBounds="1,1,1,1"
+                        AbsoluteLayout.LayoutFlags="All"
+                        HorizontalOptions="CenterAndExpand"
+                        Orientation="Horizontal"
+                        Spacing="0">
+                        <CheckBox
+                            Margin="0"
+                            IsChecked="{Binding MostraDemonstracao}"
+                            VerticalOptions="CenterAndExpand"
+                            Color="{StaticResource Primaria}" />
+                        <Label
+                            Margin="0"
+                            Padding="10,0,0,0"
+                            
+                            Text="Exibir instituições de demonstração"
+                            VerticalTextAlignment="Center">
+                            <Label.Margin>
+                                <OnPlatform x:TypeArguments="Thickness">
+                                    <On Platform="iOS" Value="-10, 0, 0, -4" />
+                                </OnPlatform>
+                            </Label.Margin>
+                        </Label>
+                    </StackLayout>
+
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AlternaDemonstracao}" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                </Grid>
+
+                <ListView
+                    Margin="0,0,0,5"
+                    HasUnevenRows="true"
+                    ItemTapped="HospitalLista_OnItemTapped"
+                    ItemsSource="{Binding Hospitais}"
+                    Scrolled="ListView_Scrolled"
+                    SelectionMode="None"
+                    SeparatorVisibility="None"
+                    VerticalOptions="FillAndExpand">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame
+                                    Margin="25,5,25,5"
+                                    Padding="0"
+                                    BorderColor="LightGray"
+                                    CornerRadius="4"
+                                    HasShadow="False">
+                                    <StackLayout Orientation="Horizontal" Spacing="4">
+                                        <custom:CustomCachedImage
+                                            Margin="5,0"
+                                            HeightRequest="50"
+                                            VerticalOptions="CenterAndExpand">
+                                            <custom:CustomCachedImage.Source>
+                                                <UriImageSource
+                                                    CacheValidity="1"
+                                                    CachingEnabled="True"
+                                                    Uri="{Binding SmallLogo}" />
+                                            </custom:CustomCachedImage.Source>
+                                        </custom:CustomCachedImage>
+                                        <Label
+                                            
+                                            Text="{Binding Nome}"
+                                            VerticalOptions="Center" />
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Hmed.Login.LoginPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloading="clr-namespace:Hmed.AppComponents.CustomComponents"
+    x:Name="Pagina"
+    BackgroundColor="White"
+    NavigationPage.HasNavigationBar="False"
+    SizeChanged="PageSizeChanged">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="EntryFrame" TargetType="Frame">
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="BorderColor" Value="{Binding EntryBorderColor}" />
+                <Setter Property="CornerRadius" Value="3" />
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="BackgroundColor" Value="White" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout x:Name="absolute">
+
+        <AbsoluteLayout AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All">
+            <Image
+                AbsoluteLayout.LayoutBounds="0.5, 0, 1, AutoSize "
+                AbsoluteLayout.LayoutFlags="WidthProportional,PositionProportional"
+                Source="{StaticResource PoligonoTop}" />
+            <Image
+                AbsoluteLayout.LayoutBounds="0.5, 1, 1, AutoSize "
+                AbsoluteLayout.LayoutFlags="WidthProportional,PositionProportional"
+                IsVisible="{Binding MostraBottom}"
+                Source="{StaticResource PoligonoBottom}" />
+            <Label
+                Margin="0,0,0,5"
+                AbsoluteLayout.LayoutBounds="0.9, 1, AutoSize, AutoSize"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                FontFamily="{StaticResource Bold}"
+                FontSize="Micro"
+                IsVisible="{Binding MostraBottom}"
+                Text="{Binding Version}"
+                TextColor="Black" />
+
+        </AbsoluteLayout>
+
+        <StackLayout
+            x:Name="Stack"
+            Margin="00,0,0,80"
+            AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1"
+            AbsoluteLayout.LayoutFlags="All"
+            IsVisible="{Binding Carregado}"
+            VerticalOptions="Center">
+
+            <ffimageloading:CustomCachedImage
+                HeightRequest="200"
+                HorizontalOptions="Center"
+                WidthRequest="200">
+                <ffimageloading:CustomCachedImage.Source>
+                    <UriImageSource Uri="{Binding CaminhoLogo}" />
+                </ffimageloading:CustomCachedImage.Source>
+            </ffimageloading:CustomCachedImage>
+
+            <StackLayout Margin="40,0,40,15">
+
+                <Label Text="Usuário:" TextColor="{StaticResource Primaria}" />
+
+                <Frame Style="{StaticResource EntryFrame}">
+                    <Entry
+                        x:Name="Usuario"
+                        Placeholder="Digite seu Usuário"
+                        Text="{Binding Usuario}"
+                        WidthRequest="300" />
+                </Frame>
+
+
+                <Label
+                    IsTabStop="True"
+                    Text="Senha:"
+                    TextColor="{StaticResource Primaria}" />
+
+                <Frame Style="{StaticResource EntryFrame}">
+                    <Entry
+                        x:Name="Senha"
+                        IsPassword="{Binding OcultaPassword}"
+                        Placeholder="Digite sua Senha"
+                        Text="{Binding Senha}" />
+                </Frame>
+
+                <Image
+                    HorizontalOptions="EndAndExpand"
+                    Source="{Binding IconePassword}"
+                    WidthRequest="30">
+                    <Image.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="iOS" Value="0,-38,10,0" />
+                            <On Platform="Android" Value="0,-45,10,0" />
+                        </OnPlatform>
+                    </Image.Margin>
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AlternaPassword}" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+            </StackLayout>
+
+            <Button
+                Padding="0"
+                BackgroundColor="White"
+                BorderColor="{StaticResource Primaria}"
+                BorderWidth="0.6"
+                Command="{Binding Entrar}"
+                CornerRadius="20"
+                HeightRequest="35"
+                HorizontalOptions="Center"
+                Text="Entrar"
+                TextColor="{StaticResource Primaria}"
+                WidthRequest="120" />
+            <Label
+                Margin="0,0,0,0"
+                HorizontalOptions="CenterAndExpand"
+                Text="{Binding HospitalSelecionado.Nome}"
+                TextColor="{StaticResource Primaria}" />
+
+        </StackLayout>
+
+        <ActivityIndicator IsVisible="{Binding CarregandoLista}" />
+
+        <Image
+            Margin="10,20"
+            AbsoluteLayout.LayoutBounds="0, 0.05, AutoSize, AutoSize"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            Aspect="Fill"
+            HeightRequest="30"
+            Source="{StaticResource IconeVoltar}"
+            WidthRequest="30">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding Voltar}" />
+            </Image.GestureRecognizers>
+
+        </Image>
+
+    </AbsoluteLayout>
+
+</ContentPage>

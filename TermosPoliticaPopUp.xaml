@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<rg:PopupPage
+    x:Class="Hmed.Login.TermosPoliticaPopUp"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:rg="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup">
+    <rg:PopupPage.Content>
+        <Frame
+            Margin="20,0"
+            Padding="20"
+            BackgroundColor="White"
+            BorderColor="LightGray"
+            CornerRadius="10"
+            HasShadow="True"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+            <StackLayout>
+                <Label
+                    FontSize="Medium"
+                    HorizontalOptions="CenterAndExpand"
+                    FontFamily="{StaticResource Bold}"
+                    Text="Privacidade e Termos" />
+                <Label  Text="Para continuar, é necessário concordar com os Termos de Uso do HMed e com as Politicas de Privacidade." />
+
+                <AbsoluteLayout
+                    HeightRequest="50"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Center">
+                    <StackLayout
+                        AbsoluteLayout.LayoutBounds="1,1,1,1"
+                        AbsoluteLayout.LayoutFlags="All"
+                        Orientation="Horizontal">
+                        <CheckBox
+                            IsChecked="{Binding Checkbox}"
+                            VerticalOptions="CenterAndExpand"
+                            Color="{StaticResource Primaria}" />
+
+                        <StackLayout Spacing="0">
+                            <Label
+                                
+                                VerticalOptions="CenterAndExpand"
+                                VerticalTextAlignment="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <FormattedString.Spans>
+                                            <Span Text="Li e concordo com os " />
+                                            <Span
+                                                FontFamily="{StaticResource Bold}"
+                                                Text="Termos de Uso "
+                                                TextColor="{StaticResource Primaria}">
+                                                <Span.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding AbrirTermosUso}" />
+                                                </Span.GestureRecognizers>
+                                            </Span>
+                                            <Span Text="e " />
+                                        </FormattedString.Spans>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <Label
+                                
+                                VerticalOptions="CenterAndExpand"
+                                VerticalTextAlignment="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <FormattedString.Spans>
+                                            <Span
+                                                FontFamily="{StaticResource Bold}"
+                                                Text="Políticas de Privacidade"
+                                                TextColor="{StaticResource Primaria}">
+                                                <Span.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding AbrirPoliticaPrivacidade}" />
+                                                </Span.GestureRecognizers>
+                                            </Span>
+                                            <Span Text="." />
+                                        </FormattedString.Spans>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+                    </StackLayout>
+                </AbsoluteLayout>
+
+                <Button
+                    BackgroundColor="Transparent"
+                    BorderColor="{StaticResource Primaria}"
+                    BorderWidth="1"
+                    Command="{Binding AceitarTermos}"
+                    CornerRadius="25"
+                    HeightRequest="40"
+                    IsEnabled="{Binding HabilitarBotao}"
+                    FontFamily="{StaticResource Bold}"
+                    Text="Continuar"
+                    TextColor="{StaticResource Primaria}" />
+            </StackLayout>
+
+        </Frame>
+    </rg:PopupPage.Content>
+</rg:PopupPage>
